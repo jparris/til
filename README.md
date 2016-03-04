@@ -11,7 +11,7 @@ This is a page is a selection of notes and tips to make life easier when working
 `cd -` will take you to the previous directory. The previous directory is stored in the `$OLD_PWD` env var.
 
 ### Redirect only stderr.
-The trick is to redirect stderr to stdout with `2>&1` and then redirect stdout to the bit bucket with `>/dev/null=`. E.g.,
+The trick is to redirect stderr to stdout with `2>&1` and then redirect stdout to the bit bucket with `>/dev/null`. E.g.,
 ```
 <command> 2>&1 >/dev/null | grep "or somthing" 
 ```
