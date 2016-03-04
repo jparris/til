@@ -24,3 +24,5 @@ slabinfo (5)         - kernel slab allocator statistics
 nfsiostat (8)        - Emulate iostat for NFS mount points using /proc/self/mountstats
 xqmstats (8)         - Display XFS quota manager statistics from /proc
 ```
+## 80's Nostalgia 
+![80's Nostalgia](https://raw.githubusercontent.com/jparris/til/master/imgs/the_more_you_know.jpg)
