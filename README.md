@@ -121,6 +121,14 @@ SSL-Session:
     Verify return code: 0 (ok)
 ---
 ```
-  
+
+## Obscure but useful
+### Making a device driver
+If you ever need to create a Linux device driver, in a chroot for example, use `mknod`. In our example here we're creating a second null device.
+```
+mknod /tmp/null/ 1 3
+```
+The magic numbers `1` and `3` are major and minor device numbers respectively. These device numbers are defined ![here](https://www.kernel.org/doc/Documentation/devices.txt).
+
 ## 80's Nostalgia 
 ![80's Nostalgia](https://raw.githubusercontent.com/jparris/til/master/imgs/the_more_you_know.jpg)
