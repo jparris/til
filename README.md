@@ -1,6 +1,6 @@
 # TIL - Today I Learned
 
-Notes about C, Bash, Unix, and ViM.
+Notes about C, Bash, Unix, and Vim.
 
 ---
 ## Meta
@@ -138,6 +138,14 @@ If you ever need to create a Linux device driver, in a chroot for example, use `
 mknod /tmp/null/ 1 3
 ```
 The magic numbers `1` and `3` are major and minor device numbers respectively. These device numbers are defined ![here](https://www.kernel.org/doc/Documentation/devices.txt).
+
+## Vim
+### Man pages in Vim
+Vim since version 6.0 has had support for displaying syntax highlighted withing vim, but becuase new things are bad and therefore disabled it's not widely used/known about. To enable man pages add `runtime! ftplugin/man.vim` to your vimrc. You can then invoke man pages like so.
+```
+Man 3 printf
+```
+The biggest advantage I see to using man pages with in vim is that tags are automatically supported, so ^] away. 
 
 ## 80's Nostalgia 
 ![80's Nostalgia](https://raw.githubusercontent.com/jparris/til/master/imgs/the_more_you_know.jpg)
