@@ -10,6 +10,15 @@ This is a page is a selection of notes and tips to make life easier when working
 ### Go to the previous directory
 `cd -` will take you to the previous directory. The previous directory is stored in the `$OLD_PWD` env var.
 
+### Ranges and String Expansions
+Bash supports creating range of integers with the syntax `{start...end}`. Bash will expand the conents into a string  delimited with spaces. This is particular usefuly for for loops which recognizes the space delimited format. In our simplistic example we echo the values from 1 to 10.
+```
+$ echo {1..10}
+1 2 3 4 5 6 7 8 9 10
+```
+Bash also supports string exansion using the same syntax. E.g., `echo a{d,c,b}e` yeilds `ade ace abe`.
+Bash also supports empty parameters `cp /etc/some/deep/path/some.file{,.bak}` becomes `cp /etc/some/deep/path/some.file /etc/some/deep/path/some.file.bak`. 
+
 ### Redirect only stderr.
 The trick is to redirect stderr to stdout with `2>&1` and then redirect stdout to the bit bucket with `>/dev/null`. E.g.,
 ```
