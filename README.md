@@ -10,6 +10,18 @@ This is a page is a selection of notes and tips to make life easier when working
 ### Go to the previous directory
 `cd -` will take you to the previous directory. The previous directory is stored in the `$OLD_PWD` env var.
 
+### Pidof
+`pidof` does what it says on the label, it returns a list of pids matching the program name. E.g.,
+```
+pidof ssh
+29421 28283 28180 28031 27122 22432 21558 21480 21230...
+```
+`pidof` is useful for scripting and I also use it for this gdb oneliner to attach to a running process by name.
+```
+gdb attach $(pidof <daemon name>)
+```
+Caveat on the gdb onliner, in my use case I'm attaching a to a daemon that has a single instance. If your attaching to one process of many that share the same name the `-s` which returns only 1 pid may or may not be helpful. The man page fails to document which pid it returns; in my expirience it returns the largest pid, your milage may vary.
+ 
 ### Ranges and String Expansions
 Bash supports creating range of integers with the syntax `{start...end}`. Bash will expand the conents into a string  delimited with spaces. This is particular usefuly for for loops which recognizes the space delimited format. In our simplistic example we echo the values from 1 to 10.
 ```
