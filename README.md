@@ -45,7 +45,17 @@ slabinfo (5)         - kernel slab allocator statistics
 nfsiostat (8)        - Emulate iostat for NFS mount points using /proc/self/mountstats
 xqmstats (8)         - Display XFS quota manager statistics from /proc
 ```
+## libreadline - the transparent interface.
+At first glance the the following tips look like they belong in the bash section. Here's the thing, bash uses libreadline which provides the cursor, line editing, and history. This is a long and convoluted way of saying that these tips should be valid for any shell or program that uses libreadline not just bash. 
 
+### History Expansion
+* !! expands to the previous command. The most common use case is to prefix sudo to the bad idea you didn't have permissions for.
+```
+$ apt-get remove e2fsprogs
+error: you cannot perform this operation unless you are root.
+$ sudo !!
+```
+ 
 ## Networking
 ### Examine a SSL/TLS Handshake
 When debbuginng encyption problems my first step is to examine the handshake paramesters using `openssl s_client -connect`.
