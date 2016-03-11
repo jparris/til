@@ -49,13 +49,51 @@ xqmstats (8)         - Display XFS quota manager statistics from /proc
 At first glance the the following tips look like they belong in the bash section. Here's the thing, bash uses libreadline which provides the cursor, line editing, and history. This is a long and convoluted way of saying that these tips should be valid for any shell or program that uses libreadline not just bash. 
 
 ### History Expansion
-* !! expands to the previous command. The most common use case is to prefix sudo to the bad idea you didn't have permissions for.
+History expansions are built up from a series of subcommand, but they all must be prefixed with the `!`.
+
+#### Index subcommands
+* **Absolute Index:** When you want to repeat a history entry you simple call `!<index>`. In this example I want to repeat `ssh -Q cipher` query after mofiying my ssh config. 
+```
+$ history | head
+    1  ssh -Q cipher
+    2  vim ~/.ssh/config
+    ...
+$ !1
+ssh -Q cipher
+...
+```
+* **Relative Index:** History expansions also support relative indexes using the syntax `!-<how many commad ago>`. So in our previous example I could have also done.
+```
+$ !-2
+ssh -Q cipher
+aes256-gcm@openssh.com
+chacha20-poly1305@openssh.com
+```
+* **Last Command Short Cut** We could use `!-1` to reference the previous command but that a drag so the `!!` shortcut exists. The most common use case is to prefix sudo to the bad idea you didn't have permissions for.
 ```
 $ apt-get remove e2fsprogs
 error: you cannot perform this operation unless you are root.
 $ sudo !!
 ```
- 
+
+#### Search Subcommands 
+* **Command Begins With:** `!<query>` will execute first command that starts with the query.
+```
+root@snoded834:~# !ps
+ps -ef | grep rsyslog
+root     29310     1  0 10:55 ?        00:00:00 rsyslogd -c5 -f /root/rsyslog.sec -i /tmp/foo
+root     29327     1  0 10:55 ?        00:00:00 /usr/sbin/rsyslogd -c5
+root     29335 29284  0 10:56 pts/1    00:00:00 grep rsyslog
+root@snoded834:~# 
+```
+* **Command Contains:** `!?<query>` will execute the first command that contains the query.
+```
+root@snoded834:~# !?rsyslog
+/etc/init.d/rsyslog restart
+Stopping enhanced syslogd: rsyslogd.
+Starting enhanced syslogd: rsyslogd.
+```
+
 ## Networking
 ### Examine a SSL/TLS Handshake
 When debbuginng encyption problems my first step is to examine the handshake paramesters using `openssl s_client -connect`.
