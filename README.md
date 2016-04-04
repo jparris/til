@@ -99,6 +99,28 @@ Squeeze-lts was end of lifed at the being of this month (03/15). The problem is 
 ```
 deb http://archive.debian.org/debian-archive/debian/ squeeze-lts main contrib non-free
 ```
+### Modifing a `.deb` package
+There are serveral ways of modifying a `.deb` while my method of using `ar` is a little fidly it has the benefit of perserving file permissions without messing about with fakeroot.
+#### Extracting
+ * Copy the package to your working directory
+ * `mkdir -p <package_name>/cntrl`
+ * `cd <package_name>`
+ * `ar x ../<package_name>.deb`
+ * `cd ctrl`
+ * `tar xvzf ../control.tar.gz` 
+
+#### Make your changes
+ * `control` specifies dependencies and conflicts.
+ * `prerm` and `postint` control restarting the daemon. 
+
+#### Compacting
+ * `tar czvf control.tar.gz *`
+ * `mv control.tar.gz ..`
+ * `cd ..`
+ * `ar r <package_name>~<description_of_your_change>.deb debian-binary control.tar.gz data.tar.gz`
+ 
+ **Note the ar options must be in the above order.**
+
 
 ## Networking
 ### Examine a SSL/TLS Handshake
