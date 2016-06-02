@@ -95,7 +95,7 @@ Starting enhanced syslogd: rsyslogd.
 ```
 ## Debian
 ### Getting the last squeeze-lts updates
-Squeeze-lts was end of lifed at the being of this month (03/15). The problem is that all of the packages have been migrated over to the debian-archive so without modification `apt-get update` is useless. Add the following line to your `/etc/apt/sources.list` then run apt-get update.
+Squeeze-lts was end of lifed at the being of this month (03/15). The problem is that all of the packages have been migrated over to the debian-archive so without modification `apt-get update` is useless. Add the following line to your `/etc/apt/sources.list` then run `apt-get -o Acquire::Check-Valid-Until=false update`.
 ```
 deb http://archive.debian.org/debian-archive/debian/ squeeze-lts main contrib non-free
 ```
