@@ -8,10 +8,10 @@ This is a page is a selection of notes and tips to make life easier when working
 ---
 ## Table of Contents
 * [Bash](#bash)
-* [Debian](#debian)
 * [libreadline](#libreadline)
 * [Networking](#networking)
-* [Posix](#posix)
+* [POSIX](#posix)
+ * [Debian](#debian)
 * [Vim](#vim)
 
 ## Bash
@@ -53,6 +53,8 @@ slabinfo (5)         - kernel slab allocator statistics
 nfsiostat (8)        - Emulate iostat for NFS mount points using /proc/self/mountstats
 xqmstats (8)         - Display XFS quota manager statistics from /proc
 ```
+
+---
 ## libreadline - the transparent interface.
 At first glance the the following tips look like they belong in the bash section. Here's the thing, bash uses libreadline which provides the cursor, line editing, and history. This is a long and convoluted way of saying that these tips should be valid for any shell or program that uses libreadline not just bash. 
 
@@ -101,38 +103,13 @@ root@snoded834:~# !?rsyslog
 Stopping enhanced syslogd: rsyslogd.
 Starting enhanced syslogd: rsyslogd.
 ```
-## Debian
-### Getting the last squeeze-lts updates
-Squeeze-lts was end of lifed at the being of this month (03/15). The problem is that all of the packages have been migrated over to the debian-archive so without modification `apt-get update` is useless. Add the following line to your `/etc/apt/sources.list` then run `apt-get -o Acquire::Check-Valid-Until=false update`.
-```
-deb http://archive.debian.org/debian-archive/debian/ squeeze-lts main contrib non-free
-```
-### Modifing a `.deb` package
-There are serveral ways of modifying a `.deb` while my method of using `ar` is a little fidly it has the benefit of perserving file permissions without messing about with fakeroot.
-#### Extracting
- * Copy the package to your working directory
- * `mkdir -p <package_name>/cntrl`
- * `cd <package_name>`
- * `ar x ../<package_name>.deb`
- * `cd ctrl`
- * `tar xvzf ../control.tar.gz` 
 
-#### Make your changes
- * `control` specifies dependencies and conflicts.
- * `prerm` and `postint` control restarting the daemon. 
-
-#### Compacting
- * `tar czvf control.tar.gz *`
- * `mv control.tar.gz ..`
- * `cd ..`
- * `ar r <package_name>~<description_of_your_change>.deb debian-binary control.tar.gz data.tar.gz`
- 
- **Note the ar options must be in the above order.**
-
+---
 ## Make
 ### Debugging shelled out commands.
 A shell command failing on you? Not sure what make is exactly executing? simply run. `make SHELL='sh -x'`
 
+---
 ## Networking
 ### Examine a SSL/TLS Handshake
 When debbuginng encyption problems my first step is to examine the handshake paramesters using `openssl s_client -connect`.
@@ -230,7 +207,37 @@ SSL-Session:
 ---
 ```
 
+---
 ## POSIX
+---
+## Debian
+### Getting the last squeeze-lts updates
+Squeeze-lts was end of lifed at the being of this month (03/15). The problem is that all of the packages have been migrated over to the debian-archive so without modification `apt-get update` is useless. Add the following line to your `/etc/apt/sources.list` then run `apt-get -o Acquire::Check-Valid-Until=false update`.
+```
+deb http://archive.debian.org/debian-archive/debian/ squeeze-lts main contrib non-free
+```
+### Modifing a `.deb` package
+There are serveral ways of modifying a `.deb` while my method of using `ar` is a little fidly it has the benefit of perserving file permissions without messing about with fakeroot.
+#### Extracting
+ * Copy the package to your working directory
+ * `mkdir -p <package_name>/cntrl`
+ * `cd <package_name>`
+ * `ar x ../<package_name>.deb`
+ * `cd ctrl`
+ * `tar xvzf ../control.tar.gz` 
+
+#### Make your changes
+ * `control` specifies dependencies and conflicts.
+ * `prerm` and `postint` control restarting the daemon. 
+
+#### Compacting
+ * `tar czvf control.tar.gz *`
+ * `mv control.tar.gz ..`
+ * `cd ..`
+ * `ar r <package_name>~<description_of_your_change>.deb debian-binary control.tar.gz data.tar.gz`
+ 
+ **Note the ar options must be in the above order.**
+
 ### Making a device driver
 If you ever need to create a Linux device driver, in a chroot for example, use `mknod`. In our example here we're creating a second null device.
 ```
@@ -238,6 +245,7 @@ mknod /tmp/null/ 1 3
 ```
 The magic numbers `1` and `3` are major and minor device numbers respectively. These device numbers are defined ![here](https://www.kernel.org/doc/Documentation/devices.txt).
 
+---
 ## Vim
 ### Man pages in Vim
 Vim since version 6.0 has had support for displaying syntax highlighted withing vim, but becuase new things are bad and therefore disabled it's not widely used/known about. To enable man pages add `runtime! ftplugin/man.vim` to your vimrc. You can then invoke man pages like so.
@@ -246,5 +254,6 @@ Man 3 printf
 ```
 The biggest advantage I see to using man pages with in vim is that tags are automatically supported, so ^] away. 
 
+---
 ## 80's Nostalgia 
 ![80's Nostalgia](https://raw.githubusercontent.com/jparris/til/master/imgs/the_more_you_know.jpg)
