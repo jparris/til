@@ -2,9 +2,17 @@
 
 Notes about C, Bash, Unix, and Vim.
 
----
-## Meta
+### Meta
 This is a page is a selection of notes and tips to make life easier when working in a POSIX environment. Some tips are elementary, and some are fairly specific, sophisticated, or obscure. Most of these notes will work in a vanilla *nix environment.
+
+---
+## Table of Contents
+* [Bash](#bash)
+* [Debian](#debian)
+* [libreadline](#libreadline)
+* [Networking](#networking)
+* [Posix](#posix)
+* [Vim](#vim)
 
 ## Bash
 ### Go to the previous directory
@@ -121,6 +129,9 @@ There are serveral ways of modifying a `.deb` while my method of using `ar` is a
  
  **Note the ar options must be in the above order.**
 
+## Make
+### Debugging shelled out commands.
+A shell command failing on you? Not sure what make is exactly executing? simply run. `make SHELL='sh -x'`
 
 ## Networking
 ### Examine a SSL/TLS Handshake
@@ -219,7 +230,7 @@ SSL-Session:
 ---
 ```
 
-## Obscure but useful
+## POSIX
 ### Making a device driver
 If you ever need to create a Linux device driver, in a chroot for example, use `mknod`. In our example here we're creating a second null device.
 ```
