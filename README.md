@@ -44,7 +44,7 @@ The trick is to redirect stderr to stdout with `2>&1` and then redirect stdout t
 ```
 <command> 2>&1 >/dev/null | grep "or somthing" 
 ```
-
+Foobarrrrrrr
 ### Searching Man Pages
 Use the apropos command to search through man pages.
 ```
